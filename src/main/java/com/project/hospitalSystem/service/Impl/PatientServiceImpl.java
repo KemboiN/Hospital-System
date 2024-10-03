@@ -1,12 +1,13 @@
-package com.project.hospitalSystem.service;
+package com.project.hospitalSystem.service.Impl;
 
 import com.project.hospitalSystem.Utils.AccountUtils;
-import com.project.hospitalSystem.dto.DoctorRequest;
 import com.project.hospitalSystem.dto.EmailDetails;
 import com.project.hospitalSystem.dto.HospitalResponse;
 import com.project.hospitalSystem.dto.PatientRequest;
 import com.project.hospitalSystem.model.Patient;
 import com.project.hospitalSystem.repo.PatientRepository;
+import com.project.hospitalSystem.service.EmailService;
+import com.project.hospitalSystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

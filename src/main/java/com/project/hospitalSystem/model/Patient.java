@@ -30,6 +30,8 @@ public class Patient {
     private String medicalHistory;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<currentMedication> currentMedications= new ArrayList<>();
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Appointment> appointmentList= new ArrayList<>();
     private List<String> allergies;
 
 

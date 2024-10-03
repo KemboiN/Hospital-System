@@ -9,8 +9,8 @@ import org.w3c.dom.Text;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class DoctorRequest
 {
@@ -18,7 +18,9 @@ public class DoctorRequest
     private  String fullName;
     private String specialization;
     private String gender;
+    private int age;
     private Date dob;
+    private String available;
     private  String contactNumber;
     private int yearsOfExperience;
     private String department;
