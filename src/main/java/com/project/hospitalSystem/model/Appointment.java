@@ -19,6 +19,7 @@ public class Appointment {
     private Long id;
     private LocalDate date;
     private String appointStatus;
+    //private  Long appointmentId;
     @ManyToOne
     @JoinColumn(name ="patient_id")
     private Patient patient;

@@ -62,12 +62,13 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .patient(patient)
                 .doctor(doctor)
                 .appointStatus(appointmentRequest.getAppointStatus())
+                //.appointmentId(appointmentRequest.getAppointmentId())
                 .build();
         appointmentRepo.save(appointment);
             EmailDetails emailDetails= EmailDetails.builder()
                     .recipient(appointmentRequest.getEmail())
                     .subject("Appointment booking")
-                    .messageBody("Congratulations, \"Your Appointment booking Was Successfull")
+                    .messageBody("Congratulations, \"Your Appointment booking Was Successful")
                     .build();
             emailService.sendEmailAlert(emailDetails);
 
@@ -83,5 +84,44 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .responseMessage(AccountUtils.Appointment_Exist_Response_Message)
                 .build();
     }
+    }
+
+    @Override
+    public HospitalResponse UpdateAppointment(Long appointmentId, AppointmentRequest appointmentRequest) {
+        Optional<Appointment>appointmentOptional = appointmentRepo.findById(appointmentId);
+
+       if (!appointmentOptional.isPresent()){
+           return  HospitalResponse.builder()
+                   .responseCode(AccountUtils.Appointment_Does_Not_Exists_Response_Code)
+                   .responseMessage(AccountUtils.Appointment_Does_Not_Exists_Response_Message)
+                   .build();
+       }
+       Appointment existingAppointment= appointmentOptional.get();
+       if (appointmentRequest.getDoctorId()!=null)
+       {
+           Optional<Doctor>doctorOptional= doctorRepository.findById(appointmentRequest.getDoctorId());
+           if (!doctorOptional.isPresent())
+           {
+               return HospitalResponse.builder()
+                       .responseCode(AccountUtils.Doctor_Not_Found_Response_Code)
+                       .responseMessage(AccountUtils.Doctor_Not_Found_Response_Message)
+                       .build();
+           }
+           existingAppointment.setDoctor(doctorOptional.get());
+
+            }
+
+        if (appointmentRequest.getDate() !=null)
+        {
+            existingAppointment.setDate(appointmentRequest.getDate());
+        }
+        if (appointmentRequest.getReason() !=null){
+            existingAppointment.setReason(appointmentRequest.getReason());
+        }
+        appointmentRepo.save(existingAppointment);
+        return HospitalResponse.builder()
+                .responseCode(AccountUtils.Appointment_Update_Success_Response_Code)
+                .responseMessage(AccountUtils.Appointment_Update_Success_Response_Message)
+                .build();
     }
 }

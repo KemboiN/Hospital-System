@@ -8,5 +8,6 @@ import org.springframework.stereotype.Service;
 public interface AppointmentService
 {
  HospitalResponse BookAppointment(AppointmentRequest appointRequest);
+ HospitalResponse UpdateAppointment(Long appointmentId, AppointmentRequest appointmentRequest);
 
 }

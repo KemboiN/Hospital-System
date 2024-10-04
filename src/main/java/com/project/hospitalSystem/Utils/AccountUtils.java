@@ -14,7 +14,9 @@ public class AccountUtils
     public static  final String Appointment_Success_Saved_Response_Message="The Appointment Was Successful";
     public static  final String Appointment_Exist_Response_Code="006";
     public static  final String Appointment_Exist_Response_Message="The Appointment Already Exists";
-    //public static  final String Appointment_Exist_Response_Code="006";
-    //public static  final String Appointment_Exist_Response_Message="The Appointment Already Exists";
+    public static  final String Appointment_Does_Not_Exists_Response_Code="007";
+    public static  final String Appointment_Does_Not_Exists_Response_Message="The Appointment Does Not Exists";
+    public static  final String Appointment_Update_Success_Response_Code="008";
+    public static  final String Appointment_Update_Success_Response_Message="The Appointment was updated successfuly";
 }
 

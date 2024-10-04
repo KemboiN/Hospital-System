@@ -16,6 +16,7 @@ public class AppointmentRequest {
     private LocalDate date;
     private String email;
     private Long doctorId;
+    private  Long appointmentId;
     private Patient patient;
     private String appointStatus;
     private  String reason;
