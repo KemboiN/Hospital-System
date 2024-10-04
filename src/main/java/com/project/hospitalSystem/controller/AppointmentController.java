@@ -26,4 +26,9 @@ public class AppointmentController {
     {
         return appointmentService.UpdateAppointment(appointmentId, appointmentRequest);
     }
+    @DeleteMapping("/DeleteAppointment/{appointmentId}")
+    public HospitalResponse DeleteAppointment(@PathVariable Long appointmentId)
+    {
+        return appointmentService.DeleteAppointment(appointmentId);
+    }
 }

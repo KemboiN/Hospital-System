@@ -17,6 +17,10 @@ public class AccountUtils
     public static  final String Appointment_Does_Not_Exists_Response_Code="007";
     public static  final String Appointment_Does_Not_Exists_Response_Message="The Appointment Does Not Exists";
     public static  final String Appointment_Update_Success_Response_Code="008";
-    public static  final String Appointment_Update_Success_Response_Message="The Appointment was updated successfuly";
+    public static  final String Appointment_Update_Success_Response_Message="The Appointment was updated successfully";
+    public static  final String Delete_Appointment_Success_Response_Code="009";
+    public static  final String Delete_Appointment_Success_Response_Message="The Appointment was Deleted successfully";
+    //public static  final String Delete_Appointment_Success_Response_Code="009";
+    //public static  final String Delete_Appointment_Success_Response_Message="The Appointment was Deleted successfully";
 }
 

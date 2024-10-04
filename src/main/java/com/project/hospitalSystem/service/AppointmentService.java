@@ -9,5 +9,6 @@ public interface AppointmentService
 {
  HospitalResponse BookAppointment(AppointmentRequest appointRequest);
  HospitalResponse UpdateAppointment(Long appointmentId, AppointmentRequest appointmentRequest);
+ HospitalResponse DeleteAppointment (Long appointmentId);
 
 }
