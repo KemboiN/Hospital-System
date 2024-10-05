@@ -11,6 +11,8 @@ import com.project.hospitalSystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PatientServiceImpl implements PatientService {
 
@@ -54,6 +56,66 @@ if(!patientRepository.existsByEmail(patientRequest.getEmail()))
 }
 }
 
+    @Override
+    public HospitalResponse updateAccountDetails(PatientRequest patientRequest) {
+        Optional<Patient>patientOptional=patientRepository.findByEmail(patientRequest.getEmail());
+        if (!patientRepository.existsByEmail(patientRequest.getEmail()))
+        {
+            return HospitalResponse.builder()
+                    .responseCode(AccountUtils.Account_Does_Not_Exists_Response_Code)
+                    .responseMessage(AccountUtils.Account_Does_Not_Exists_Response_Message)
+                    .build();
+     }
+ Patient updateAccountDetails = patientOptional.get();
+        if (updateAccountDetails.getFullName()!=null)
+        {
+            updateAccountDetails.setFullName(patientRequest.getFullName());
+        }
+        if (updateAccountDetails.getAddress()!=null)
+        {
+            updateAccountDetails.setAddress(patientRequest.getAddress());
+        }
+        if (updateAccountDetails.getContactNumber()!=null)
+        {
+            updateAccountDetails.setContactNumber(patientRequest.getContactNumber());
+        }
+        if (updateAccountDetails.getCurrentMedications()!=null && !updateAccountDetails.getCurrentMedications().isEmpty())
+        {
+            updateAccountDetails.setCurrentMedications(patientRequest.getCurrentMedications());
+
+        }
+        if (updateAccountDetails.getAge()!=null)
+        {
+            updateAccountDetails.setAge(patientRequest.getAge());
+        }
+        if (updateAccountDetails.getEmail()!=null)
+        {
+            updateAccountDetails.setEmail(patientRequest.getEmail());
+        }
+        if (updateAccountDetails.getIdNumber()!=null)
+        {
+            updateAccountDetails.setIdNumber(patientRequest.getIdNumber());
+        }
+        if (updateAccountDetails.getPassword()!=null)
+        {
+            updateAccountDetails.setPassword(patientRequest.getPassword());
+        }
+        if (updateAccountDetails.getGender()!=null)
+        {
+            updateAccountDetails.setGender(patientRequest.getGender());
+        }
+        if (updateAccountDetails.getMedicalHistory()!=null)
+        {
+            updateAccountDetails.setMedicalHistory(patientRequest.getMedicalHistory());
+        }
+        Patient updatedAccountDetails=patientRepository.save(updateAccountDetails);
+
+
+        return HospitalResponse.builder()
+                .responseCode(AccountUtils.Account_Details_Updated_Response_Code)
+                .responseMessage(AccountUtils.Account_Details_Updated_Response_Message)
+                .build();
+    }
 
 
 }

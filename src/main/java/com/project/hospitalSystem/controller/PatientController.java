@@ -6,10 +6,7 @@ import com.project.hospitalSystem.dto.PatientRequest;
 import com.project.hospitalSystem.service.DoctorService;
 import com.project.hospitalSystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/patient")
@@ -17,11 +14,17 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-   @PostMapping()
+   @PostMapping("/createAccount")
 
     public HospitalResponse createAccount (@RequestBody PatientRequest patientRequest)
     {
         return patientService.createAccount(patientRequest);
+    }
+    @PutMapping("/updateAccountDetails")
+
+    public HospitalResponse updateAccountDetails (@RequestBody PatientRequest patientRequest)
+    {
+        return patientService.updateAccountDetails(patientRequest);
     }
 
 }

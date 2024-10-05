@@ -15,6 +15,7 @@ import java.util.List;
 @Builder
 public class PatientRequest {
     private int age;
+    private Long patientId;
     private int idNumber;
     private String fullName;
     private String email;
