@@ -9,4 +9,5 @@ public interface PatientService
 {
 HospitalResponse createAccount(PatientRequest patientRequest);
 HospitalResponse updateAccountDetails(PatientRequest patientRequest);
+HospitalResponse deleteAccount( Long patientId);
 }

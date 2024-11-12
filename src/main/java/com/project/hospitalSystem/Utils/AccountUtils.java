@@ -24,5 +24,8 @@ public class AccountUtils
     public static  final String Account_Does_Not_Exists_Response_Message="The Account Does Not Exists";
     public static  final String Account_Details_Updated_Response_Code="011";
     public static  final String Account_Details_Updated_Response_Message="The Account Details Updated Successfully";
+    public static  final String Account_Deleted_Response_Code="012";
+    public static  final String Account_Deleted_Response_Message="The Account was deleted Successfully";
+
 }
 

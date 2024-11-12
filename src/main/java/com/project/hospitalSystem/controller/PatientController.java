@@ -26,5 +26,11 @@ public class PatientController {
     {
         return patientService.updateAccountDetails(patientRequest);
     }
+    @DeleteMapping("/deleteAccount")
+
+    public HospitalResponse deleteAccount (@RequestParam Long patientId)
+    {
+        return patientService.deleteAccount(patientId);
+    }
 
 }

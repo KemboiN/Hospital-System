@@ -62,7 +62,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .patient(patient)
                 .doctor(doctor)
                 .appointStatus(appointmentRequest.getAppointStatus())
-                //.appointmentId(appointmentRequest.getAppointmentId())
                 .build();
         appointmentRepo.save(appointment);
             EmailDetails emailDetails= EmailDetails.builder()

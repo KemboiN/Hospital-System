@@ -40,7 +40,8 @@ if(!patientRepository.existsByEmail(patientRequest.getEmail()))
     EmailDetails emailDetails=EmailDetails.builder()
             .recipient(patientRequest.getEmail())
             .subject("Account Creation")
-            .messageBody("CONGRATULATIONS " + savedPatient.getFullName() + ",\n\nYou have Registered with BEST Hospital\n\n For any inquiries call 0713595565")
+            .messageBody("CONGRATULATIONS " + savedPatient.getFullName() + ",\n" +
+                    "\nYou have Registered with BEST Hospital\n\n For any inquiries call 0713595565")
             .build();
    emailService.sendEmailAlert(emailDetails);
     return HospitalResponse.builder()
@@ -108,7 +109,7 @@ if(!patientRepository.existsByEmail(patientRequest.getEmail()))
         {
             updateAccountDetails.setMedicalHistory(patientRequest.getMedicalHistory());
         }
-        Patient updatedAccountDetails=patientRepository.save(updateAccountDetails);
+        patientRepository.save(updateAccountDetails);
 
 
         return HospitalResponse.builder()
@@ -116,6 +117,26 @@ if(!patientRepository.existsByEmail(patientRequest.getEmail()))
                 .responseMessage(AccountUtils.Account_Details_Updated_Response_Message)
                 .build();
     }
+
+    @Override
+    public HospitalResponse deleteAccount(Long patientId) {
+
+        Optional<Patient>patientOptional= patientRepository.findById(patientId);
+        if(patientOptional.isPresent()) {
+            patientRepository.deleteById(patientId);
+
+
+            return HospitalResponse.builder()
+                    .responseCode(AccountUtils.Account_Deleted_Response_Code)
+                    .responseMessage(AccountUtils.Account_Deleted_Response_Message)
+                    .build();
+        }
+        else return HospitalResponse.builder()
+                .responseCode(AccountUtils.Account_Does_Not_Exists_Response_Code)
+                .responseMessage(AccountUtils.Account_Does_Not_Exists_Response_Message)
+                .build();
+    }
+
 
 
 }
