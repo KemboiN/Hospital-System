@@ -16,6 +16,8 @@ import com.project.hospitalSystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 @Service
@@ -30,7 +32,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private PatientService patientService;
     @Autowired
     EmailService emailService;
-
     @Override
     public HospitalResponse BookAppointment(AppointmentRequest appointmentRequest) {
         // checking if patient exists
@@ -39,28 +40,30 @@ public class AppointmentServiceImpl implements AppointmentService {
             return HospitalResponse.builder()
                     .responseCode(AccountUtils.Patient_Not_Found_Response_Code)
                     .responseMessage(AccountUtils.Patient_Not_Found_Response_Message)
-                    .build();
-        }
-
+                    .build();}
         // checking if Doctor exists
         Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentRequest.getDoctorId());
         if (!doctorOptional.isPresent()) {
             return HospitalResponse.builder()
                     .responseCode(AccountUtils.Doctor_Not_Found_Response_Code)
                     .responseMessage(AccountUtils.Doctor_Not_Found_Response_Message)
-                    .build();
-        }
-
+                    .build(); }
 
         Patient patient = patientOptional.get();
         Doctor doctor = doctorOptional.get();
-
-        if (!appointmentRepo.existsByPatientAndDoctorAndDate(patient,doctor, appointmentRequest.getDate())) {
+        if(appointmentRepo.existsByDoctorAndDateAndTime(doctor,appointmentRequest.getDate(),appointmentRequest.getTime())){
+            return HospitalResponse.builder()
+                    .responseCode(AccountUtils.Doctor_Booked_Response_Code)
+                    .responseMessage(AccountUtils.Doctor_Booked_Response_Message)
+                    .build();
+        }
+        if (!appointmentRepo.existsByPatientAndDoctorAndDateAndTime(patient,doctor, appointmentRequest.getDate(),appointmentRequest.getTime())) {
         Appointment appointment = Appointment.builder()
                 .date(appointmentRequest.getDate())
                 .reason(appointmentRequest.getReason())
                 .patient(patient)
                 .doctor(doctor)
+                .time(appointmentRequest.getTime())
                 .appointStatus(appointmentRequest.getAppointStatus())
                 .build();
         appointmentRepo.save(appointment);
@@ -70,12 +73,10 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .messageBody("Congratulations, \"Your Appointment booking Was Successful")
                     .build();
             emailService.sendEmailAlert(emailDetails);
-
         return HospitalResponse.builder()
                 .responseCode(AccountUtils.Appointment_Success_Response_Code )
                 .responseMessage(AccountUtils.Appointment_Success_Saved_Response_Message)
-                .build();
-    }
+                .build();  }
     else {
 
         return HospitalResponse.builder()
@@ -141,4 +142,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .responseMessage(AccountUtils.Delete_Appointment_Success_Response_Message)
                 .build();
     }
+
+
+
+
+
 }

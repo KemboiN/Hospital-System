@@ -26,6 +26,8 @@ public class AccountUtils
     public static  final String Account_Details_Updated_Response_Message="The Account Details Updated Successfully";
     public static  final String Account_Deleted_Response_Code="012";
     public static  final String Account_Deleted_Response_Message="The Account was deleted Successfully";
+    public static  final String Doctor_Booked_Response_Code="013";
+    public static  final String Doctor_Booked_Response_Message="The Doctor is already booked, please check on a different time";
 
 }
 

@@ -8,12 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppointmentRequest {
     private LocalDate date;
+    private LocalTime time;
     private String email;
     private Long doctorId;
     //private  Long appointmentId;
